@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Shower - ¡Ya casi llega!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --celeste: #a2d2ff;
+            --azul-suave: #bde0fe;
+            --texto: #495057;
+            --blanco: #ffffff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--azul-suave);
+            color: var(--texto);
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            background: var(--blanco);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 { font-family: 'Pacifico', cursive; color: var(--celeste); font-size: 2.5rem; }
+        
+        /* Estilos del Contador */
+        #countdown {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+        .time-segment { background: var(--celeste); color: white; padding: 10px; border-radius: 10px; min-width: 60px; }
+        .time-segment span { display: block; font-size: 0.8rem; text-transform: uppercase; }
+
+        /* Mapa */
+        .map-container { margin: 20px 0; border-radius: 15px; overflow: hidden; border: 2px solid var(--celeste); }
+
+        /* Botón WhatsApp */
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+        .btn-whatsapp:hover { transform: scale(1.05); }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>¡Baby Shower!</h1>
+        <p>Estamos esperando con mucha ilusión la llegada de nuestro pequeño.</p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee;">
+
+        <h3>Faltan:</h3>
+        <div id="countdown">
+            <div class="time-segment"><div id="days">00</div><span>Días</span></div>
+            <div class="time-segment"><div id="hours">00</div><span>Horas</span></div>
+            <div class="time-segment"><div id="minutes">00</div><span>Min</span></div>
+            <div class="time-segment"><div id="seconds">00</div><span>Seg</span></div>
+        </div>
+
+        <h3>¿Dónde será?</h3>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6611!2d-99.167!3d19.432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU1LjIiTiA5OcKwMTAnMDEuMiJX!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx" 
+                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+
+        <p><strong>Fecha:</strong> 25 de Mayo, 2026<br>
+        <strong>Hora:</strong> 4:00 PM</p>
+
+        <a href="https://wa.me/521234567890?text=¡Hola! Confirmo mi asistencia al Baby Shower. ¡Ahí estaré!" class="btn-whatsapp" target="_blank">
+            Confirmar Asistencia vía WhatsApp
+        </a>
+    </div>
+
+    <script>
+        // CONFIGURA TU FECHA AQUÍ
+        const eventDate = new Date('May 25, 2026 16:00:00').getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = d;
+            document.getElementById("hours").innerHTML = h;
+            document.getElementById("minutes").innerHTML = m;
+            document.getElementById("seconds").innerHTML = s;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "¡Es hoy!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
