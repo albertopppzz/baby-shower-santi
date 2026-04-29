@@ -34,7 +34,11 @@
         /* --- BURBUJAS DE FONDO --- */
         .burbujas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .burbuja { position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.7); border-radius: 50%; animation: flotar 10s infinite linear; }
-        @keyframes flotar { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(-120vh); opacity: 0; } }
+        @keyframes flotar { 
+            0% { transform: translateY(0); opacity: 0; } 
+            10% { opacity: 0.8; } 
+            100% { transform: translateY(-120vh); opacity: 0; } 
+        }
         .burbuja:nth-child(1) { left: 10%; width: 40px; height: 40px; animation-duration: 8s; }
         .burbuja:nth-child(2) { left: 30%; width: 70px; height: 70px; animation-duration: 12s; animation-delay: 2s; }
         .burbuja:nth-child(3) { left: 70%; width: 50px; height: 50px; animation-duration: 9s; animation-delay: 4s; }
@@ -64,10 +68,10 @@
         .time-box span { font-size: 0.6rem; text-transform: uppercase; }
 
         /* --- MAPA --- */
-        .map-wrapper { margin: 25px 0; border-radius: 20px; overflow: hidden; border: 3px solid #fff; }
+        .map-wrapper { margin: 25px 0; border-radius: 20px; overflow: hidden; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* --- BOTÓN Y TEXTO DE ADVERTENCIA --- */
-        .instruccion-importante { font-size: 0.85rem; color: #e67e22; font-weight: 600; margin-bottom: 15px; padding: 0 10px; }
+        .instruccion-importante { font-size: 0.85rem; color: #e67e22; font-weight: 600; margin-bottom: 15px; padding: 0 10px; line-height: 1.4; }
         
         .btn-confirmar {
             background-color: #25d366;
@@ -80,6 +84,7 @@
             font-family: 'Montserrat';
             transition: 0.3s;
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+            font-size: 1rem;
         }
         .btn-confirmar:hover { transform: scale(1.05); }
 
@@ -93,7 +98,7 @@
         .ticket {
             background: white;
             border: 2px dashed var(--celeste);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -109,18 +114,18 @@
             content: '';
             position: absolute;
             top: 50%;
-            width: 20px;
-            height: 20px;
-            background: #e3f2fd; /* Color del fondo del body */
+            width: 24px;
+            height: 24px;
+            background: #e3f2fd;
             border-radius: 50%;
             transform: translateY(-50%);
         }
-        .ticket::before { left: -12px; }
-        .ticket::after { right: -12px; }
+        .ticket::before { left: -14px; }
+        .ticket::after { right: -14px; }
 
-        .ticket h4 { margin: 0; color: var(--celeste-fuerte); text-transform: uppercase; letter-spacing: 2px; }
-        .ticket p { margin: 5px 0; font-size: 0.9rem; }
-        .ticket .msg-final { color: #2ecc71; font-weight: bold; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+        .ticket h4 { margin: 0; color: var(--celeste-fuerte); text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; }
+        .ticket p { margin: 8px 0; font-size: 1rem; color: #555; }
+        .ticket .msg-final { color: #2ecc71; font-weight: bold; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; font-size: 0.95rem; }
 
     </style>
 </head>
@@ -139,8 +144,8 @@
         </div>
 
         <div id="info-invitado" style="margin-bottom: 20px;">
-            <h3 id="txt-hola" style="color: var(--celeste-fuerte);">¡Hola!</h3>
-            <p id="txt-pases"></p>
+            <h3 id="txt-hola" style="color: var(--celeste-fuerte); margin-bottom: 5px;">¡Hola!</h3>
+            <p id="txt-pases" style="margin: 0;"></p>
         </div>
 
         <div id="countdown">
@@ -148,6 +153,10 @@
             <div class="time-box"><div id="hours">00</div><span>Hrs</span></div>
             <div class="time-box"><div id="minutes">00</div><span>Min</span></div>
             <div class="time-box"><div id="seconds">00</div><span>Seg</span></div>
+        </div>
+
+        <div class="detalles" style="font-size: 0.95rem; margin-bottom: 10px;">
+            <p>📅 <strong>Viernes, 22 de Mayo de 2026</strong></p>
         </div>
 
         <div class="map-wrapper">
@@ -174,12 +183,12 @@
             </div>
         </div>
 
-        <footer style="margin-top: 30px; font-size: 0.7rem; color: #bbb;">Made Whit Love by Zelttzz ❤️</footer>
+        <footer style="margin-top: 30px; font-size: 0.7rem; color: #bbb;">Hecho con amor para Santiago</footer>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({ once: true });
 
         const params = new URLSearchParams(window.location.search);
         const nombreVal = params.get('invitado') ? params.get('invitado').replace(/_/g, ' ') : "Invitado Especial";
@@ -189,9 +198,9 @@
         document.getElementById('txt-pases').innerHTML = "Te invitamos a celebrar con nosotros. <br>Lugares reservados: <b>" + pasesVal + "</b>";
 
         function registrarAsistencia() {
-            // IDs de tu Google Form (Cámbialos por los tuyos)
-            const FORM_ID = "TU_ID_DE_GOOGLE_FORM"; 
-            const ENTRY_ID = "entry.123456789"; 
+            // IDs ACTUALIZADOS SEGÚN TU LINK
+            const FORM_ID = "1FAIpQLSfnMrcnofT1mMW4ohA5ypH8dlncByIE5uim4DHG4PjI105RWw"; 
+            const ENTRY_ID = "entry.1814797220"; 
             
             const urlForm = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${ENTRY_ID}=${encodeURIComponent(nombreVal + " (" + pasesVal + " pases)")}&submit=Submit`;
 
@@ -203,6 +212,8 @@
                 document.getElementById('ticket-nombre').innerText = nombreVal;
                 document.getElementById('ticket-pases').innerText = pasesVal;
                 document.getElementById('ticket-animado').style.display = 'block';
+            }).catch(() => {
+                alert("Hubo un error al confirmar. Por favor, intenta de nuevo.");
             });
         }
 
