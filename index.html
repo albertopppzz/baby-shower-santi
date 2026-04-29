@@ -37,7 +37,7 @@
             border: 6px solid #fff; backdrop-filter: blur(10px); text-align: center;
         }
 
-        /* IMAGEN SNOOPY */
+        /* IMAGEN SNOOPY LOCAL */
         .snoopy-container { width: 100%; height: 150px; display: flex; justify-content: center; align-items: center; margin-bottom: 5px; }
         .snoopy-img { max-height: 100%; width: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
 
@@ -61,7 +61,7 @@
             box-shadow: 0 5px 15px rgba(37,211,102,0.3);
         }
 
-        /* TICKET SNOOPY */
+        /* TICKET SNOOPY LOCAL */
         #ticket-animado { display: none; margin-top: 20px; perspective: 1000px; }
         .ticket {
             background: white; border: 2px dashed var(--celeste); padding: 25px;
@@ -83,7 +83,7 @@
 
     <div class="container" data-aos="zoom-in">
         <div class="snoopy-container">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" id="snoopy-main" alt="Snoopy" class="snoopy-img">
+            <img src="snoopy.png" alt="Snoopy" class="snoopy-img">
         </div>
         
         <h2 style="font-weight: 300; letter-spacing: 4px; color: #aaa; font-size: 0.7rem; margin: 0;">BABY SHOWER</h2>
@@ -118,7 +118,7 @@
 
         <div id="ticket-animado">
             <div class="ticket">
-                <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8yNF9hX3Bob3RvX29mX2FfY3V0ZV9zbm9vcHlfaXNvbGF0ZWRfb25fd2hpdGVfYmFja18xZTRhY2I5NC05Y2RkLTQ0Y2UtYmFmZi00OWU1ZjFkYmE2ZTNfMS5wbmc.png" class="snoopy-ticket-icon">
+                <img src="snoopy-ticket.png" class="snoopy-ticket-icon">
                 <h4>Pase Digital</h4>
                 <p>Invitado: <strong id="ticket-nombre"></strong></p>
                 <p>Accesos: <strong id="ticket-pases"></strong></p>
@@ -126,14 +126,13 @@
             </div>
         </div>
 
-        <footer style="margin-top: 25px; font-size: 0.65rem; color: #bbb;">Made Whit Love BY Zelttzz ❤️</footer>
+        <footer style="margin-top: 25px; font-size: 0.7rem; color: #bbb;">
+            Made With Love By Zellttzz ❤️
+        </footer>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Cambiando a imágenes de Snoopy garantizadas
-        document.getElementById('snoopy-main').src = "https://www.pngall.com/wp-content/uploads/5/Snoopy-PNG-Free-Download.png";
-
         AOS.init({ once: true });
         const params = new URLSearchParams(window.location.search);
         const nombreVal = params.get('invitado') ? params.get('invitado').replace(/_/g, ' ') : "Invitado Especial";
