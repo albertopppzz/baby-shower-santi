@@ -11,7 +11,7 @@
         :root {
             --celeste: #89cff0;
             --celeste-fuerte: #5dade2;
-            --blanco-cristal: rgba(255, 255, 255, 0.9);
+            --blanco-cristal: rgba(255, 255, 255, 0.95);
         }
 
         body {
@@ -31,21 +31,18 @@
         .burbuja:nth-child(3) { left: 40%; width: 30px; height: 30px; animation-duration: 9s; }
 
         .container {
-            position: relative; z-index: 10; max-width: 500px; width: 100%;
+            position: relative; z-index: 10; max-width: 480px; width: 100%;
             background: var(--blanco-cristal); padding: 30px 20px;
             border-radius: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             border: 6px solid #fff; backdrop-filter: blur(10px); text-align: center;
         }
 
         /* IMAGEN SNOOPY */
-        .snoopy-img {
-            width: 150px;
-            margin-bottom: -10px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-        }
+        .snoopy-container { width: 100%; height: 150px; display: flex; justify-content: center; align-items: center; margin-bottom: 5px; }
+        .snoopy-img { max-height: 100%; width: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
 
-        .baby-name { font-family: 'Pacifico', cursive; color: var(--celeste); font-size: 3.2rem; margin: 10px 0; }
-        .parents { font-size: 0.85rem; color: #777; font-style: italic; margin-bottom: 20px; }
+        .baby-name { font-family: 'Pacifico', cursive; color: var(--celeste); font-size: 3rem; margin: 5px 0; }
+        .parents { font-size: 0.85rem; color: #777; font-style: italic; margin-bottom: 20px; line-height: 1.4; }
 
         /* CONTADOR */
         #countdown { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
@@ -53,40 +50,43 @@
         .time-box div { font-size: 1.2rem; font-weight: bold; }
         .time-box span { font-size: 0.55rem; text-transform: uppercase; }
 
-        .map-wrapper { margin: 20px 0; border-radius: 20px; overflow: hidden; border: 3px solid #fff; }
+        .map-wrapper { margin: 20px 0; border-radius: 20px; overflow: hidden; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); line-height: 0; }
 
-        .instruccion-importante { font-size: 0.8rem; color: #e67e22; font-weight: 600; margin-bottom: 15px; }
+        .instruccion-importante { font-size: 0.8rem; color: #e67e22; font-weight: 600; margin-bottom: 15px; padding: 0 10px; }
         
         .btn-confirmar {
-            background-color: #25d366; color: white; padding: 15px 25px;
+            background-color: #25d366; color: white; padding: 16px 28px;
             border-radius: 50px; font-weight: bold; border: none; cursor: pointer;
-            font-family: 'Montserrat'; transition: 0.3s; font-size: 0.9rem;
+            font-family: 'Montserrat'; transition: 0.3s; font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(37,211,102,0.3);
         }
 
         /* TICKET SNOOPY */
         #ticket-animado { display: none; margin-top: 20px; perspective: 1000px; }
         .ticket {
-            background: white; border: 2px dashed var(--celeste); padding: 20px;
+            background: white; border: 2px dashed var(--celeste); padding: 25px;
             border-radius: 15px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             animation: ticketEntrada 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         @keyframes ticketEntrada { 0% { transform: scale(0.5) rotateX(-90deg); opacity: 0; } 100% { transform: scale(1) rotateX(0deg); opacity: 1; } }
         
-        .snoopy-ticket-icon { width: 50px; position: absolute; top: -25px; right: 10px; }
+        .snoopy-ticket-icon { width: 60px; margin-bottom: 10px; }
 
-        .msg-final { color: #2ecc71; font-weight: bold; margin-top: 10px; font-size: 0.9rem; }
+        .msg-final { color: #2ecc71; font-weight: bold; margin-top: 10px; font-size: 0.95rem; border-top: 1px solid #f0f0f0; padding-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="burbujas-bg">
-        <div class="burbuja"></div><div class="burbuja"></div><div class="burbuja"></div><div class="burbuja"></div>
+        <div class="burbuja"></div><div class="burbuja"></div><div class="burbuja"></div>
     </div>
 
     <div class="container" data-aos="zoom-in">
-        <img src="https://i.pinimg.com/originals/f3/7a/77/f37a77e814041e97d10e54d310111a8c.png" alt="Snoopy Baby" class="snoopy-img">
+        <div class="snoopy-container">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" id="snoopy-main" alt="Snoopy" class="snoopy-img">
+        </div>
         
-        <h2 style="font-weight: 300; letter-spacing: 4px; color: #aaa; font-size: 0.7rem; margin-top: 0;">BABY SHOWER</h2>
+        <h2 style="font-weight: 300; letter-spacing: 4px; color: #aaa; font-size: 0.7rem; margin: 0;">BABY SHOWER</h2>
         <h1 class="baby-name">Santiago</h1>
 
         <div class="parents">
@@ -95,7 +95,7 @@
 
         <div id="info-invitado">
             <h3 id="txt-hola" style="color: var(--celeste-fuerte); margin-bottom: 5px;">¡Hola!</h3>
-            <p id="txt-pases" style="margin: 0; font-size: 0.9rem;"></p>
+            <p id="txt-pases" style="margin: 0; font-size: 0.95rem;"></p>
         </div>
 
         <div id="countdown">
@@ -106,11 +106,11 @@
         </div>
 
         <div class="map-wrapper">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.3041249767215!2d-86.9452814!3d20.5038316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e59cf7199469b%3A0x633350325f540705!2sCozumel%2C%20Q.R.!5e0!3m2!1ses!2smx!4v1714421000000!5m2!1ses!2smx" width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3737.39205800839!2d-86.94865162498397!3d20.490148281027842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e579db6cc863f%3A0x39a520789720a8e0!2sSalon%20de%20Eventos%20El%20Encanto!5e0!3m2!1ses-419!2smx!4v1777504270040!5m2!1ses-419!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <div id="seccion-confirmar">
-            <p class="instruccion-importante">⚠️ CONFIRMA TU ASISTENCIA AQUÍ:</p>
+            <p class="instruccion-importante">⚠️ ES MUY IMPORTANTE CONFIRMAR TU ASISTENCIA AQUÍ:</p>
             <button onclick="registrarAsistencia()" class="btn-confirmar" id="btn-enviar">
                 CONFIRMAR MI ASISTENCIA
             </button>
@@ -118,20 +118,23 @@
 
         <div id="ticket-animado">
             <div class="ticket">
-                <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/snoopy-baby-transparent-claudio-m-art.png" class="snoopy-ticket-icon">
+                <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8yNF9hX3Bob3RvX29mX2FfY3V0ZV9zbm9vcHlfaXNvbGF0ZWRfb25fd2hpdGVfYmFja18xZTRhY2I5NC05Y2RkLTQ0Y2UtYmFmZi00OWU1ZjFkYmE2ZTNfMS5wbmc.png" class="snoopy-ticket-icon">
                 <h4>Pase Digital</h4>
                 <p>Invitado: <strong id="ticket-nombre"></strong></p>
                 <p>Accesos: <strong id="ticket-pases"></strong></p>
-                <div class="msg-final">✅ ¡Accesos reservados!</div>
+                <div class="msg-final">✅ ¡Accesos reservados!<br>¡Te esperamos con alegría!</div>
             </div>
         </div>
 
-        <footer style="margin-top: 25px; font-size: 0.65rem; color: #bbb;">Con amor para Santiago • Temática Snoopy</footer>
+        <footer style="margin-top: 25px; font-size: 0.65rem; color: #bbb;">Made Whit Love BY Zelttzz ❤️</footer>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        // Cambiando a imágenes de Snoopy garantizadas
+        document.getElementById('snoopy-main').src = "https://www.pngall.com/wp-content/uploads/5/Snoopy-PNG-Free-Download.png";
+
+        AOS.init({ once: true });
         const params = new URLSearchParams(window.location.search);
         const nombreVal = params.get('invitado') ? params.get('invitado').replace(/_/g, ' ') : "Invitado Especial";
         const pasesVal = params.get('pases') || "1";
