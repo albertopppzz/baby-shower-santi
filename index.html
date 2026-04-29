@@ -3,99 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby Shower - ¡Ya casi llega!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Pacifico&display=swap" rel="stylesheet">
+    <title>Baby Shower de Santiago</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --celeste: #a2d2ff;
-            --azul-suave: #bde0fe;
-            --texto: #495057;
+            --celeste: #89cff0;
+            --celeste-fuerte: #5dade2;
+            --texto: #555;
             --blanco: #ffffff;
         }
 
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--azul-suave);
+            background-color: #f0f8ff;
             color: var(--texto);
             margin: 0;
+            padding: 20px;
             text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Animación de fondo: Burbujas */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #d1e9ff 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: 0 1000px; }
         }
 
         .container {
-            max-width: 500px;
-            margin: 20px auto;
-            background: var(--blanco);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 550px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border: 5px solid #fff;
+            backdrop-filter: blur(5px);
         }
 
-        h1 { font-family: 'Pacifico', cursive; color: var(--celeste); font-size: 2.5rem; }
+        .header h2 { 
+            font-weight: 300; 
+            letter-spacing: 4px; 
+            margin-bottom: 0; 
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .baby-name { 
+            font-family: 'Pacifico', cursive; 
+            color: var(--celeste); 
+            font-size: 3.8rem; 
+            margin: 10px 0;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
         
-        /* Estilos del Contador */
+        .parents { 
+            font-style: italic; 
+            font-size: 0.95rem; 
+            color: #777; 
+            margin-bottom: 35px; 
+            line-height: 1.6; 
+        }
+
+        .invitation-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            padding: 0 15px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Estilo del Contador Animado */
         #countdown {
             display: flex;
-            justify-content: space-around;
-            margin: 25px 0;
-            font-weight: bold;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0 45px;
         }
-        .time-segment { background: var(--celeste); color: white; padding: 10px; border-radius: 10px; min-width: 60px; }
-        .time-segment span { display: block; font-size: 0.8rem; text-transform: uppercase; }
+        .time-segment { 
+            background: linear-gradient(135deg, var(--celeste), var(--celeste-fuerte));
+            color: white; 
+            padding: 15px 10px; 
+            border-radius: 20px; 
+            min-width: 75px;
+            box-shadow: 0 8px 15px rgba(137, 207, 240, 0.3);
+        }
+        .time-segment div { font-size: 1.6rem; font-weight: 600; }
+        .time-segment span { display: block; font-size: 0.7rem; text-transform: uppercase; margin-top: 3px; }
 
         /* Mapa */
-        .map-container { margin: 20px 0; border-radius: 15px; overflow: hidden; border: 2px solid var(--celeste); }
+        .map-container { 
+            margin: 35px 0; 
+            border-radius: 25px; 
+            overflow: hidden; 
+            border: 4px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            line-height: 0;
+        }
 
-        /* Botón WhatsApp */
-        .btn-whatsapp {
+        /* Botón WhatsApp con efecto de brillo */
+        .btn-confirm {
             display: inline-block;
-            background-color: #25d366;
+            background: #25d366;
             color: white;
-            padding: 15px 25px;
+            padding: 20px 35px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            transition: transform 0.3s;
-            margin-top: 20px;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+            position: relative;
+            overflow: hidden;
         }
-        .btn-whatsapp:hover { transform: scale(1.05); }
+
+        .btn-confirm:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        footer { margin-top: 40px; font-size: 0.85rem; color: #aaa; letter-spacing: 1px; }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>¡Baby Shower!</h1>
-        <p>Estamos esperando con mucha ilusión la llegada de nuestro pequeño.</p>
+    <div class="container" data-aos="zoom-in" data-aos-duration="1000">
         
-        <hr style="border: 0; border-top: 1px solid #eee;">
+        <div class="header" data-aos="fade-down" data-aos-delay="200">
+            <h2>NUESTRO DULCE ESPERA</h2>
+            <div class="baby-name">Santiago</div>
+        </div>
 
-        <h3>Faltan:</h3>
-        <div id="countdown">
+        <div class="parents" data-aos="fade-up" data-aos-delay="400">
+            Invitación de sus papás:<br>
+            <strong>Yolanda Estephania Hernandez May</strong><br>
+            &<br>
+            <strong>Nestor David Ake Cardenas</strong>
+        </div>
+
+        <div class="invitation-text" data-aos="fade-in" data-aos-delay="600">
+            "Hay momentos que cambian la vida para siempre. <br>
+            Estamos muy emocionados de compartir contigo la alegría de que nuestro amado 
+            <strong>Santiago</strong> pronto estará en nuestros brazos."
+        </div>
+
+        <div class="countdown-title" style="font-weight: 600; font-size: 0.8rem;">¡FALTAN POCOS DÍAS!</div>
+        <div id="countdown" data-aos="flip-up" data-aos-delay="800">
             <div class="time-segment"><div id="days">00</div><span>Días</span></div>
             <div class="time-segment"><div id="hours">00</div><span>Horas</span></div>
             <div class="time-segment"><div id="minutes">00</div><span>Min</span></div>
             <div class="time-segment"><div id="seconds">00</div><span>Seg</span></div>
         </div>
 
-        <h3>¿Dónde será?</h3>
-        <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6611!2d-99.167!3d19.432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU1LjIiTiA5OcKwMTAnMDEuMiJX!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx" 
-                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
-            </iframe>
+        <div class="info" data-aos="fade-up">
+            <p style="font-size: 1.2rem;">📅 <strong>22 de Mayo, 2026</strong></p>
+            <p>📍 <strong>¡Te esperamos aquí!</strong></p>
         </div>
 
-        <p><strong>Fecha:</strong> 25 de Mayo, 2026<br>
-        <strong>Hora:</strong> 4:00 PM</p>
+        <div class="map-container" data-aos="fade-up">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3737.39205800839!2d-86.94865162498397!3d20.49014828102783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e579db6cc863f%3A0x39a520789720a8e0!2sSalon%20de%20Eventos%20El%20Encanto!5e0!3m2!1ses!2smx!4v1777500143769!5m2!1ses!2smx" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
 
-        <a href="https://wa.me/521234567890?text=¡Hola! Confirmo mi asistencia al Baby Shower. ¡Ahí estaré!" class="btn-whatsapp" target="_blank">
-            Confirmar Asistencia vía WhatsApp
-        </a>
+        <div data-aos="zoom-in" data-aos-delay="400">
+            <a href="https://wa.me/TU_NUMERO_AQUI?text=¡Hola! Confirmo con mucha alegría mi asistencia al Baby Shower de Santiago. ¡Ahí estaré!" class="btn-confirm" target="_blank">
+                CONFIRMAR ASISTENCIA
+            </a>
+        </div>
+
+        <footer>
+            Familia Ake Hernandez • 2026
+        </footer>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // CONFIGURA TU FECHA AQUÍ
-        const eventDate = new Date('May 25, 2026 16:00:00').getTime();
+        AOS.init({ once: true }); // Inicializa las animaciones
+
+        // Fecha del evento: 22 de Mayo
+        const eventDate = new Date('May 22, 2026 16:00:00').getTime();
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
@@ -106,14 +210,14 @@
             const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerHTML = d;
-            document.getElementById("hours").innerHTML = h;
-            document.getElementById("minutes").innerHTML = m;
-            document.getElementById("seconds").innerHTML = s;
+            document.getElementById("days").innerHTML = d < 10 ? '0' + d : d;
+            document.getElementById("hours").innerHTML = h < 10 ? '0' + h : h;
+            document.getElementById("minutes").innerHTML = m < 10 ? '0' + m : m;
+            document.getElementById("seconds").innerHTML = s < 10 ? '0' + s : s;
 
             if (distance < 0) {
                 clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "¡Es hoy!";
+                document.getElementById("countdown").innerHTML = "<div style='font-size: 1.8rem; color: var(--celeste); font-weight: bold;'>¡ES HOY!</div>";
             }
         }, 1000);
     </script>
