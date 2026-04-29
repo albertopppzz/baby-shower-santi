@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Shower de Santiago</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --celeste: #89cff0;
+            --celeste-fuerte: #5dade2;
+            --texto: #555;
+            --blanco-cristal: rgba(255, 255, 255, 0.9);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e3f2fd;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- BURBUJAS DE FONDO --- */
+        .burbujas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .burbuja { position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.7); border-radius: 50%; animation: flotar 10s infinite linear; }
+        @keyframes flotar { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(-120vh); opacity: 0; } }
+        .burbuja:nth-child(1) { left: 10%; width: 40px; height: 40px; animation-duration: 8s; }
+        .burbuja:nth-child(2) { left: 30%; width: 70px; height: 70px; animation-duration: 12s; animation-delay: 2s; }
+        .burbuja:nth-child(3) { left: 70%; width: 50px; height: 50px; animation-duration: 9s; animation-delay: 4s; }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 500px;
+            width: 100%;
+            background: var(--blanco-cristal);
+            padding: 40px 25px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 6px solid #fff;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .baby-name { font-family: 'Pacifico', cursive; color: var(--celeste); font-size: 3.5rem; margin: 10px 0; }
+        .parents { font-size: 0.9rem; color: #777; font-style: italic; margin-bottom: 25px; }
+
+        /* --- CONTADOR --- */
+        #countdown { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .time-box { background: linear-gradient(135deg, var(--celeste), var(--celeste-fuerte)); color: white; padding: 10px; border-radius: 15px; min-width: 65px; }
+        .time-box div { font-size: 1.3rem; font-weight: bold; }
+        .time-box span { font-size: 0.6rem; text-transform: uppercase; }
+
+        /* --- MAPA --- */
+        .map-wrapper { margin: 25px 0; border-radius: 20px; overflow: hidden; border: 3px solid #fff; }
+
+        /* --- BOTÓN Y TEXTO DE ADVERTENCIA --- */
+        .instruccion-importante { font-size: 0.85rem; color: #e67e22; font-weight: 600; margin-bottom: 15px; padding: 0 10px; }
+        
+        .btn-confirmar {
+            background-color: #25d366;
+            color: white;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat';
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+        }
+        .btn-confirmar:hover { transform: scale(1.05); }
+
+        /* --- ANIMACIÓN DEL TICKET --- */
+        #ticket-animado {
+            display: none;
+            margin-top: 20px;
+            perspective: 1000px;
+        }
+
+        .ticket {
+            background: white;
+            border: 2px dashed var(--celeste);
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: ticketEntrada 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes ticketEntrada {
+            0% { transform: scale(0.5) rotateX(-90deg); opacity: 0; }
+            100% { transform: scale(1) rotateX(0deg); opacity: 1; }
+        }
+
+        .ticket::before, .ticket::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #e3f2fd; /* Color del fondo del body */
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket::before { left: -12px; }
+        .ticket::after { right: -12px; }
+
+        .ticket h4 { margin: 0; color: var(--celeste-fuerte); text-transform: uppercase; letter-spacing: 2px; }
+        .ticket p { margin: 5px 0; font-size: 0.9rem; }
+        .ticket .msg-final { color: #2ecc71; font-weight: bold; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="burbujas-bg">
+        <div class="burbuja"></div><div class="burbuja"></div><div class="burbuja"></div>
+    </div>
+
+    <div class="container" data-aos="zoom-in">
+        <h2 style="font-weight: 300; letter-spacing: 4px; color: #aaa; font-size: 0.7rem;">BABY SHOWER</h2>
+        <h1 class="baby-name">Santiago</h1>
+
+        <div class="parents">
+            <strong>Yolanda Estephania Hernandez May</strong><br>&<br><strong>Nestor David Ake Cardenas</strong>
+        </div>
+
+        <div id="info-invitado" style="margin-bottom: 20px;">
+            <h3 id="txt-hola" style="color: var(--celeste-fuerte);">¡Hola!</h3>
+            <p id="txt-pases"></p>
+        </div>
+
+        <div id="countdown">
+            <div class="time-box"><div id="days">00</div><span>Días</span></div>
+            <div class="time-box"><div id="hours">00</div><span>Hrs</span></div>
+            <div class="time-box"><div id="minutes">00</div><span>Min</span></div>
+            <div class="time-box"><div id="seconds">00</div><span>Seg</span></div>
+        </div>
+
+        <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3737.39205800839!2d-86.94865162498397!3d20.49014828102783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e579db6cc863f%3A0x39a520789720a8e0!2sSalon%20de%20Eventos%20El%20Encanto!5e0!3m2!1ses!2smx!4v1777500143769!5m2!1ses!2smx" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div id="seccion-confirmar">
+            <p class="instruccion-importante">
+                ⚠️ ES MUY IMPORTANTE CONFIRMAR TU ASISTENCIA DANDO CLIC AL BOTÓN DE ABAJO PARA RESERVAR TU LUGAR:
+            </p>
+            <button onclick="registrarAsistencia()" class="btn-confirmar" id="btn-enviar">
+                CONFIRMAR MI ASISTENCIA
+            </button>
+        </div>
+
+        <div id="ticket-animado">
+            <div class="ticket">
+                <h4>Pase Digital</h4>
+                <p>Invitado: <strong id="ticket-nombre"></strong></p>
+                <p>Accesos: <strong id="ticket-pases"></strong></p>
+                <div class="msg-final">
+                    ✅ ¡Tus accesos ya han sido reservados y pronto te llegarán!
+                </div>
+            </div>
+        </div>
+
+        <footer style="margin-top: 30px; font-size: 0.7rem; color: #bbb;">Hecho con amor para Santiago</footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        const params = new URLSearchParams(window.location.search);
+        const nombreVal = params.get('invitado') ? params.get('invitado').replace(/_/g, ' ') : "Invitado Especial";
+        const pasesVal = params.get('pases') || "1";
+
+        document.getElementById('txt-hola').innerText = "¡Hola " + nombreVal + "!";
+        document.getElementById('txt-pases').innerHTML = "Te invitamos a celebrar con nosotros. <br>Lugares reservados: <b>" + pasesVal + "</b>";
+
+        function registrarAsistencia() {
+            // IDs de tu Google Form (Cámbialos por los tuyos)
+            const FORM_ID = "TU_ID_DE_GOOGLE_FORM"; 
+            const ENTRY_ID = "entry.123456789"; 
+            
+            const urlForm = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${ENTRY_ID}=${encodeURIComponent(nombreVal + " (" + pasesVal + " pases)")}&submit=Submit`;
+
+            fetch(urlForm, { method: 'POST', mode: 'no-cors' }).then(() => {
+                // Ocultar botón e instrucción
+                document.getElementById('seccion-confirmar').style.display = 'none';
+                
+                // Mostrar Ticket con datos
+                document.getElementById('ticket-nombre').innerText = nombreVal;
+                document.getElementById('ticket-pases').innerText = pasesVal;
+                document.getElementById('ticket-animado').style.display = 'block';
+            });
+        }
+
+        const targetDate = new Date('May 22, 2026 16:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            if(diff > 0) {
+                document.getElementById("days").innerText = Math.floor(diff / 86400000);
+                document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
+                document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000);
+                document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
