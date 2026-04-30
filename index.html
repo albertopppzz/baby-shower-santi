@@ -22,7 +22,6 @@
             min-height: 100vh; overflow-x: hidden;
         }
 
-        /* BURBUJAS */
         .burbujas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .burbuja { position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.6); border-radius: 50%; animation: flotar 10s infinite linear; border: 1px solid rgba(255,255,255,0.8); }
         @keyframes flotar { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(-120vh); opacity: 0; } }
@@ -37,14 +36,17 @@
             border: 6px solid #fff; backdrop-filter: blur(10px); text-align: center;
         }
 
-        /* IMAGEN SNOOPY LOCAL */
-        .snoopy-container { width: 100%; height: 150px; display: flex; justify-content: center; align-items: center; margin-bottom: 5px; }
+        .snoopy-container { width: 100%; height: 140px; display: flex; justify-content: center; align-items: center; margin-bottom: 5px; }
         .snoopy-img { max-height: 100%; width: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
 
         .baby-name { font-family: 'Pacifico', cursive; color: var(--celeste); font-size: 3rem; margin: 5px 0; }
-        .parents { font-size: 0.85rem; color: #777; font-style: italic; margin-bottom: 20px; line-height: 1.4; }
+        .parents { font-size: 0.85rem; color: #777; font-style: italic; margin-bottom: 15px; line-height: 1.4; }
 
-        /* CONTADOR */
+        .mensaje-bonito { font-size: 0.95rem; color: #666; margin: 15px 0; line-height: 1.5; padding: 0 10px; font-weight: 400; }
+
+        .fecha-evento { background: #f0f9ff; border-radius: 20px; padding: 10px; margin: 15px 0; border: 1px dashed var(--celeste); }
+        .fecha-evento p { margin: 0; color: #444; font-weight: 600; font-size: 1rem; }
+
         #countdown { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
         .time-box { background: var(--celeste); color: white; padding: 10px; border-radius: 15px; min-width: 60px; }
         .time-box div { font-size: 1.2rem; font-weight: bold; }
@@ -61,7 +63,6 @@
             box-shadow: 0 5px 15px rgba(37,211,102,0.3);
         }
 
-        /* TICKET SNOOPY LOCAL */
         #ticket-animado { display: none; margin-top: 20px; perspective: 1000px; }
         .ticket {
             background: white; border: 2px dashed var(--celeste); padding: 25px;
@@ -71,7 +72,6 @@
         @keyframes ticketEntrada { 0% { transform: scale(0.5) rotateX(-90deg); opacity: 0; } 100% { transform: scale(1) rotateX(0deg); opacity: 1; } }
         
         .snoopy-ticket-icon { width: 60px; margin-bottom: 10px; }
-
         .msg-final { color: #2ecc71; font-weight: bold; margin-top: 10px; font-size: 0.95rem; border-top: 1px solid #f0f0f0; padding-top: 10px; }
     </style>
 </head>
@@ -93,9 +93,18 @@
             <strong>Yolanda Estephania Hernandez May</strong><br>&<br><strong>Nestor David Ake Cardenas</strong>
         </div>
 
+        <p class="mensaje-bonito">
+            Hay momentos en la vida que son únicos, y compartirlos con las personas que queremos los hace inolvidables. ¡Nos encantaría que nos acompañes a celebrar la próxima llegada de nuestro pequeño Santiago!
+        </p>
+
         <div id="info-invitado">
             <h3 id="txt-hola" style="color: var(--celeste-fuerte); margin-bottom: 5px;">¡Hola!</h3>
             <p id="txt-pases" style="margin: 0; font-size: 0.95rem;"></p>
+        </div>
+
+        <div class="fecha-evento">
+            <p>📅 Viernes 22 de Mayo</p>
+            <p>🕒 A partir de la 1:00 PM</p>
         </div>
 
         <div id="countdown">
@@ -110,7 +119,7 @@
         </div>
 
         <div id="seccion-confirmar">
-            <p class="instruccion-importante">⚠️ ES MUY IMPORTANTE CONFIRMAR TU ASISTENCIA AQUÍ:</p>
+            <p class="instruccion-importante">⚠️ TU PRESENCIA ES NUESTRO MEJOR REGALO, POR FAVOR CONFIRMA AQUÍ:</p>
             <button onclick="registrarAsistencia()" class="btn-confirmar" id="btn-enviar">
                 CONFIRMAR MI ASISTENCIA
             </button>
@@ -122,7 +131,7 @@
                 <h4>Pase Digital</h4>
                 <p>Invitado: <strong id="ticket-nombre"></strong></p>
                 <p>Accesos: <strong id="ticket-pases"></strong></p>
-                <div class="msg-final">✅ ¡Accesos reservados!<br>¡Te esperamos con alegría!</div>
+                <div class="msg-final">✅ ¡Accesos reservados!<br>¡Gracias por acompañarnos!</div>
             </div>
         </div>
 
@@ -154,7 +163,8 @@
             });
         }
 
-        const targetDate = new Date('May 22, 2026 16:00:00').getTime();
+        // FECHA ACTUALIZADA: 22 de mayo, 2026 a la 1:00 PM (13:00 hrs)
+        const targetDate = new Date('May 22, 2026 13:00:00').getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
